@@ -1,0 +1,2 @@
+3[gdansk, warszawa]
+2[bydgoszcz, warszawa]
