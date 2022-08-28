@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ReadFile {
+public class ReadAndWriteFile {
 
     private static final int NUMBER_OF_CITIES = 10000;
 
-    public void readFile(String input) {
+
+    public void readAndWriteFile(String input, String output) {
         try(InputStreamReader reader = new InputStreamReader(new FileInputStream(input))) {
             BufferedReader br = new BufferedReader(reader);
             String line = br.readLine();
@@ -73,13 +74,16 @@ public class ReadFile {
                     Integer[] distancesFromSource = matrix.waysOfMinimumCostBetweenPairsOfCities(startIndex);
                     int destinationDistance = distancesFromSource[destinationIndex];
 
-                   try(FileOutputStream outputStream = new FileOutputStream("output.txt")) {
-                       OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-                       BufferedWriter bufWriter = new BufferedWriter(writer);
-                       bufWriter.write(destinationDistance);
-                       bufWriter.write(Arrays.toString(cityNames));
-                       System.out.println("End");
-                   }
+
+                    try(PrintWriter writer = new PrintWriter(new FileOutputStream(output, true))) {
+
+                        writer.write(String.valueOf(destinationDistance));
+                        writer.write(Arrays.toString(cityNames) + "\n");
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        System.err.println("Error writing " + e);
+                    }
                 }
             }
         } catch (IOException e) {

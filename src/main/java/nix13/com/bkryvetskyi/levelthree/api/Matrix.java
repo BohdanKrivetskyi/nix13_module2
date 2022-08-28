@@ -8,7 +8,7 @@ import static java.util.Arrays.fill;
 public class Matrix {
 
     private final int INFINITY = 10001;
-    private int[][] cost;
+    private final int[][] cost;
 
     public Matrix(int vertices) {
         cost = new int[vertices][vertices];
